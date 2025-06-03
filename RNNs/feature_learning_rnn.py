@@ -158,7 +158,6 @@ def setup_task(task_name):
     return {"dataset": dataset, "env": env, "batch_size": batch_size, "seq_len": seq_len}
 
 def get_var_list(hidden_size):
-    # var_list = np.array([10, 25, 50, 100, 200, 300])
     var_list = np.array([1, 5, 10, 25, 50, 100, 200, 300])
     return var_list[var_list <= hidden_size]
 
@@ -266,7 +265,6 @@ def run_main(params):
     decision_labels = labels0[env.start_ind['decision']:env.end_ind['decision']].flatten()
     input_size = env.observation_space.shape[0]
     output_size = env.action_space.n
-    testset_size = len(decision_labels)
     dt = env.dt
 
     var_list = get_var_list(args.hidden_size)
@@ -274,7 +272,6 @@ def run_main(params):
     criterion = torch.nn.CrossEntropyLoss()
 
     running_loss = 0
-    running_acc = 0
     print_step = args.print_step
     hidden_size = args.hidden_size
 
