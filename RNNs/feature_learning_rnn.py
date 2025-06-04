@@ -7,7 +7,7 @@ import pandas as pd
 import argparse
 import random
 import gcmc
-from gcmc.utils import LabelSampleType
+from gcmc.contrib import gcmc_analysis_dataframe
 import neurogym as ngym
 
 
@@ -169,10 +169,9 @@ def setup_weight_rank(W, rank):
 def get_capacity(activity, labels, var, seed):
     X_tot = make_Xtot(activity.squeeze(), labels)
     try:
-        # capacity_res = gcmc.manifold_analysis(X_tot, backend="numpy", label_sample_type=LabelSampleType.ONE_VERSUS_REST)
-        capacity_res = gcmc.manifold_analysis_cnc(X_tot, seed=seed, analysis_type='ONE_VERSUS_REST_ALL', preprocess_type='center', scale=0)
+        capacity_res = gcmc_analysis_dataframe(X_tot, seed=seed, analysis_type='ONE_VERSUS_REST_ALL', preprocess_type='center', scale=0)
     except Exception as exception:
-        print(f"Cannot run GCMC at var {var} iter 0. Exception: {exception}")
+        print(f"Cannot run GCMC at var {var} seed {seed}. Exception: {exception}")
         capacity_res = None
     return capacity_res, X_tot
 
