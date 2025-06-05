@@ -1,0 +1,24 @@
+{
+    "params_config": {
+        "model": ["resnet18", "preact-resnet18", "VGG11"],
+        "optim": ["Adam", "SGD"],
+        "task": ["CIFAR-10", "CIFAR-100"],
+        "criterion": ["crossEntropy", "mse"],
+        "mode": ["model_training", "feature_extraction", "feature_analysis", "few_shot", "linear_probe", "eval_corrupt"]
+    },
+    "filename_config": {
+        "input_data": "/mnt/home/hlethi/dataset",
+        "model_checkpoint": "{save_folder}/{mode}/model_checkpoint/{filename_base}/ckpt_{filename_base}_epoch_{epoch}.pkl",
+        "training_state": "{save_folder}/{mode}/training_state/{filename_base}.pkl",
+        "extracted_feature": "{save_folder}/{mode}/{filename_base}/features_{filename_base}_epoch_{epoch}.pkl",
+        "analysis_result": "{save_folder}/{mode}/{filename_base}/result_{filename_base}_epoch_{epoch}.pkl",
+        "few_shot": "{save_folder}/{mode}/{filename_base}/fsresult_{filename_base}.pkl",
+        "linear_probe_state": "{save_folder}/{mode}/training_state/{filename_base}/{filename_base}_epoch_{epoch}.pkl",
+        "linear_probe_checkpoint": "{save_folder}/{mode}/model_checkpoint/{filename_base}/{filename_base}_epoch_{epoch}.pkl",
+        "linear_probe_capacity": "{save_folder}/{mode}/capacity/{filename_base}/{filename_base}_epoch_{epoch}.pkl",
+        "eval_corrupt": "{save_folder}/{mode}/model_eval/{filename_base}.pkl",
+        "eval_corrupt_capacity": "{save_folder}/{mode}/capacity/{filename_base}/{filename_base}_epoch_{epoch}_sev_{severity}.pkl",
+        "weight_analysis": "{save_folder}/{mode}/{filename_base}.pkl",
+        "kernels": "{save_folder}/{mode}/{filename_base}.pkl"
+    }
+}
