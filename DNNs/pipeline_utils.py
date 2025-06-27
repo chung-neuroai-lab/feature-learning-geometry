@@ -38,9 +38,7 @@ def generate_parameter_list(inputs, intermediate_results=[]):
 
 def generate_parameter_pipeline(param_inputs, pipeline_name):
     # TODO: Move this to `config.json`
-    if pipeline_name == "few_shot":
-        pipeline_steps = ["model_training", "few_shot"]
-    elif pipeline_name == "standard":
+    if pipeline_name == "standard":
         pipeline_steps = ["model_training", "feature_analysis"]
     elif pipeline_name == "linear_probe":
         pipeline_steps = ["model_training", "linear_probe"]

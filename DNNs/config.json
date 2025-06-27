@@ -4,7 +4,7 @@
         "optim": ["Adam", "SGD"],
         "task": ["CIFAR-10", "CIFAR-100"],
         "criterion": ["crossEntropy", "mse"],
-        "mode": ["model_training", "feature_extraction", "feature_analysis", "few_shot", "linear_probe", "eval_corrupt"]
+        "mode": ["model_training", "feature_extraction", "feature_analysis", "linear_probe", "eval_corrupt"]
     },
     "filename_config": {
         "input_data": "/mnt/home/hlethi/dataset",
