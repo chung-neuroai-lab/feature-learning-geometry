@@ -87,6 +87,10 @@ def generate_filename(params, mode):
         return filename
 
 def get_steps(num_step):
+    """Given number of gradient steps (`num_step` int), return the list of chosen steps (`chosen_step` [int])
+    to be used to extract features from, typically double each step ([0, 1, 2, 4, 8, ...]). Also include
+    mid-point for long-step range (step, int(step*4/3), int(step*5/3), step*2)
+    """
     double_steps = [0, 1]
     current_step = 1
     while current_step*2 < num_step:

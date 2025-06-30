@@ -12,7 +12,7 @@ def main(params_filename, mode):
     import os
     import sys
     import json
-    import run_train_model_lazy, run_feature_analysis, run_linear_probe, run_eval_corrupt, run_kernel_methods, run_train_model_lazy_step
+    import run_train_model_lazy, run_feature_analysis, run_linear_probe, run_eval_corrupt, run_kernel_methods
 
     # read MPI config
     comm = MPI.COMM_WORLD
@@ -40,8 +40,7 @@ def main(params_filename, mode):
     this_param = params[job_idx]
     this_param["mode"] = mode
     mode_to_func = {
-        "model_training": run_train_model_lazy_step,
-        # "model_training": run_train_model_lazy,
+        "model_training": run_train_model_lazy,
         "feature_analysis": run_feature_analysis,
         "linear_probe": run_linear_probe,
         "eval_corrupt": run_eval_corrupt,
