@@ -140,10 +140,10 @@ def load_model_from_path(model, model_filepath):
 def load_base_model(model_name, pretrained=False, k=1):
     # TODO: Use `models_cifar` for all resnet on cifar
     if model_name == "resnet18":
-        import modelsLazy
-        model = modelsLazy.ResNet18(k)
+        import models_lazy
+        model = models_lazy.ResNet18(k)
     elif "VGG" in model_name:
-        from modelsLazy import VGG
+        from models_lazy import VGG
         model = VGG(model_name, k)
     else:
         import torchvision
@@ -188,15 +188,17 @@ def save_analysis_result(results, filename_config, filename_params, save_mode):
         pickle.dump(results, f)
     print(f"Saving mode {save_mode} to {filepath}...")
 
-def compute_capacity(XtotTs):
-    import gcmc
+def compute_capacity_pairwise(XtotTs):
+    """ Use pairwise computation for capacity in case of highly correlated data
+    """
     import pandas as pd
+    from gcmc.contrib import gcmc_analysis_dataframe
     df_list = []
     num_cls, num_dim, num_sample = XtotTs.shape
     for i in range(num_cls):
         for j in range(i+1, num_cls):
             XtotT = [XtotTs[i], XtotTs[j]]
-            ret = gcmc.manifold_analysis_cnc(XtotT,indices=(i,j),indices_name=['i','j'], run_volume=False)
+            ret = gcmc_analysis_dataframe(XtotT,indices=(i,j),indices_name=['i','j'])
             df_list.append(ret)
     df = pd.concat(df_list)
     return df
