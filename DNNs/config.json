@@ -8,6 +8,7 @@
     },
     "filename_config": {
         "input_data": "/mnt/home/hlethi/dataset",
+        "corrupt_data_folder": "/mnt/home/hlethi/dataset/CIFAR-10-C",
         "model_checkpoint": "{save_folder}/{mode}/model_checkpoint/{filename_base}/ckpt_{filename_base}_epoch_{epoch}.pkl",
         "training_state": "{save_folder}/{mode}/training_state/{filename_base}.pkl",
         "extracted_feature": "{save_folder}/{mode}/{filename_base}/features_{filename_base}_epoch_{epoch}.pkl",

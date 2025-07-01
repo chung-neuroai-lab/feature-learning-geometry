@@ -145,14 +145,8 @@ def main(params):
     sub_seed = params["subSeed"] if "subSeed" in params else 0
     np.random.seed(sub_seed)
     layer = params["layer"]
-    if "runCapacity" in params:
-        run_capacity = bool(params["runCapacity"])
-    else:
-        run_capacity = False
-    if "runLinearProbe" in params:
-        run_probe = bool(params["runLinearProbe"])
-    else:
-        run_probe = False
+    run_capacity = bool(params["runCapacity"]) if "runCapacity" in params else False
+    run_probe = bool(params["runLinearProbe"]) if "runLinearProbe" in params else True
     epoch_list = pipeline_utils.generate_epoch_list(num_epoch)
     use_last_epoch = params["lastEpoch"] if "lastEpoch" in params else False
     if use_last_epoch:
@@ -206,17 +200,17 @@ def main(params):
         filename_params_base = {"save_folder": save_folder, "filename_base": filename_base, "mode": params["mode"]}
 
         ### Train linear probe
-        if run_probe:
-            for (epoch_idx, epoch) in enumerate(epoch_list):
-                print(f"Extracting epoch {epoch}. [{epoch_idx} / {len(epoch_list)}] epoch...")
-                # Load pre-trained model
-                model_filepath = model_checkpoint_pattern.format(**model_checkpoint_filename_params,
-                                        epoch=epoch)
-                base_model = pipeline_utils.load_base_model(model_name)
-                model = pipeline_utils.load_model_from_path(base_model, model_filepath)
-                print(f"Loading model at {model_filepath}")
-                model = model.to(DEVICE)
-                model.eval()
+        for (epoch_idx, epoch) in enumerate(epoch_list):
+            print(f"Extracting epoch {epoch}. [{epoch_idx} / {len(epoch_list)}] epoch...")
+            # Load pre-trained model
+            model_filepath = model_checkpoint_pattern.format(**model_checkpoint_filename_params,
+                                    epoch=epoch)
+            base_model = pipeline_utils.load_base_model(model_name)
+            model = pipeline_utils.load_model_from_path(base_model, model_filepath)
+            print(f"Loading model at {model_filepath}")
+            model = model.to(DEVICE)
+            model.eval()
+            if run_probe:
                 linear_probe = LinearProbe(model, in_dim, num_classes)
                 criterion = nn.CrossEntropyLoss()
                 optimizer = torch.optim.Adam(linear_probe.linear_probe.parameters(), lr=lr)
