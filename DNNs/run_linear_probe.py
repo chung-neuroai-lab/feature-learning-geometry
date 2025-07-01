@@ -147,7 +147,8 @@ def main(params):
     layer = params["layer"]
     run_capacity = bool(params["runCapacity"]) if "runCapacity" in params else False
     run_probe = bool(params["runLinearProbe"]) if "runLinearProbe" in params else True
-    epoch_list = pipeline_utils.generate_epoch_list(num_epoch)
+    use_step = bool(params["useStep"])
+    epoch_list = pipeline_utils.generate_epoch_list(num_epoch, use_step=use_step)
     use_last_epoch = params["lastEpoch"] if "lastEpoch" in params else False
     if use_last_epoch:
         epoch_list = [epoch_list[-1]]

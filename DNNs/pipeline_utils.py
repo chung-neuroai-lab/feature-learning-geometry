@@ -70,7 +70,7 @@ def generate_filename(params, mode):
         "linear_probe": sorted(["model", "task", "optim", "lr", "alpha", "fsData", "decay", "numCls", "seed"]),
         "eval_corrupt": sorted(["model", "task", "optim", "lr", "alpha", "fsData", "decay", "seed"]),
         "weight_analysis": sorted(["model", "task", "optim", "lr", "alpha", "decay", "seed"]),
-        "kernels": sorted(["model", "task", "optim", "lr", "alpha", "decay", "seed", "numSpl", "numCls", "subSeed"]),
+        "kernels": sorted(["model", "task", "optim", "lr", "alpha", "decay", "seed", "fsData", "numSpl", "numCls", "subSeed"]),
     }
     if mode not in mode_to_params:
         raise ValueError(f"Mode {mode} is not in supported list of mode {mode_to_params.keys()}")

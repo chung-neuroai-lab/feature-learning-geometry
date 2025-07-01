@@ -109,7 +109,8 @@ def main(params):
     corrupt_data_folder = filename_config["corrupt_data_folder"]
     model_name = params["model"]
     num_epoch = params["num_epoch"]
-    epoch_list = pipeline_utils.generate_epoch_list(num_epoch)
+    use_step = bool(params["useStep"])
+    epoch_list = pipeline_utils.generate_epoch_list(num_epoch, use_step=use_step)
     criterion = pipeline_utils.get_criterion(params["criterion"])
     run_capacity = bool(params["runCapacity"]) if "runCapacity" in params else False
     run_eval = bool(params["runEvalCorrupt"]) if "runEvalCorrupt" in params else True

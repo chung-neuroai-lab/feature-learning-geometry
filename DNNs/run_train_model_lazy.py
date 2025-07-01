@@ -334,7 +334,7 @@ def main(params):
     filename_base = pipeline_utils.generate_filename(params, params["mode"])
     filename_params_base = {"save_folder": save_folder, "filename_base": filename_base, "mode": params["mode"]}
     num_epoch = params["num_epoch"]
-    use_step = params["useStep"]
+    use_step = bool(params["useStep"])
     epoch_list = pipeline_utils.generate_epoch_list(num_epoch, use_step=use_step)
 
     ### Load dataset

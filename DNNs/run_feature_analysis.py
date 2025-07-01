@@ -84,7 +84,7 @@ def main(params):
     layers = params["layers"]
     sub_seed = params["subSeed"] if "subSeed" in params else 0
     np.random.seed(sub_seed)
-    use_step = params["useStep"]
+    use_step = bool(params["useStep"])
     epoch_list = pipeline_utils.generate_epoch_list(num_epoch, use_step=use_step)
     use_last_epoch = params["lastEpoch"] if "lastEpoch" in params else False
     do_save_feature = params["saveFeature"] if "saveFeature" in params else False
