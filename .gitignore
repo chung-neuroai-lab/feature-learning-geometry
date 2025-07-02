@@ -172,3 +172,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# logs and params files
+DNNs/params/
+DNNs/logs/
+RNNs/params/
+RNNs/logs
