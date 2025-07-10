@@ -192,13 +192,13 @@ def compute_capacity_pairwise(XtotTs):
     """ Use pairwise computation for capacity in case of highly correlated data
     """
     import pandas as pd
-    from gcmc.contrib import gcmc_analysis_dataframe
+    from glue.contrib import glue_analysis_dataframe
     df_list = []
     num_cls, num_dim, num_sample = XtotTs.shape
     for i in range(num_cls):
         for j in range(i+1, num_cls):
             XtotT = [XtotTs[i], XtotTs[j]]
-            ret = gcmc_analysis_dataframe(XtotT,indices=(i,j),indices_name=['i','j'])
+            ret = glue_analysis_dataframe(XtotT,indices=(i,j),indices_name=['i','j'])
             df_list.append(ret)
     df = pd.concat(df_list)
     return df

@@ -4,7 +4,7 @@ import os
 import torch
 import numpy as np
 from copy import deepcopy
-import gcmc
+import glue
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -169,12 +169,12 @@ def main(params):
                 for layer in features:
                     feature_data = prepare_data_for_manifold_analysis(features[layer])
                     try:
-                        analysis_result = gcmc.manifold_analysis(feature_data, backend="numpy")
+                        analysis_result = glue.glue_analysis(feature_data, backend="numpy")
                         analysis_results[layer] = analysis_result
                     except:
                         try:
                             feature_data += np.random.randn(*feature_data.shape)*1e-6
-                            analysis_result = gcmc.manifold_analysis(feature_data, backend="numpy")
+                            analysis_result = glue.glue_analysis(feature_data, backend="numpy")
                             analysis_results[layer] = analysis_result
                         except Exception as e:
                             print(f"Run to error with params {params} at epoch {epoch} layer {layer} \n error msg {e}")

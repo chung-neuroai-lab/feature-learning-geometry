@@ -4,14 +4,13 @@ import pickle as pkl
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm.notebook import tqdm
-import pipelineUtils
+import pipeline_utils
 import glob
 import warnings
 import seaborn as sns
 import scipy
 import re
 from copy import deepcopy
-import gcmc
 
 def is_number(x):
     try:
@@ -117,7 +116,7 @@ def create_queries(df, col_list):
     col_to_val = {}
     for col in col_list:
         col_to_val[col] = sorted(df[col].unique())
-    query_dict_list = pipelineUtils.generate_parameter_list(col_to_val)
+    query_dict_list = pipeline_utils.generate_parameter_list(col_to_val)
     query_list = []
     for query_dict in query_dict_list:
         query = ""
