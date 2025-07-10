@@ -8,7 +8,6 @@ import pipeline_utils
 from copy import deepcopy
 import numpy as np
 import run_feature_analysis
-import gcmc
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 

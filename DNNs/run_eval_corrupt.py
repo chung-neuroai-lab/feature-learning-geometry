@@ -8,7 +8,7 @@ import pipeline_dataset
 import pipeline_utils
 import run_feature_analysis
 from copy import deepcopy
-import gcmc
+import glue
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -209,13 +209,13 @@ def main(params):
                         print(f"Num classes: {len(feature_data)} | Shape: {feature_data[0].shape}")
                         print("Running manifold analysis...")
                         try:
-                            analysis_result = gcmc.manifold_analysis(feature_data, backend="numpy")
+                            analysis_result = glue.glue_analysis(feature_data, backend="numpy")
                             # analysis_result = pipeline_utils.compute_capacity(feature_data)
                             analysis_results[layer] = analysis_result
                         except:
                             try:
                                 feature_data += np.random.randn(*feature_data.shape)*1e-6
-                                analysis_result = gcmc.manifold_analysis(feature_data, backend="numpy")
+                                analysis_result = glue.glue_analysis(feature_data, backend="numpy")
                                 # analysis_result = pipeline_utils.compute_capacity(feature_data)
                                 analysis_results[layer] = analysis_result
                             except Exception as e:
